@@ -11,3 +11,14 @@
 var http = require('http')
 
 var url = process.argv[2]
+
+http.get(url, function (res) {
+  res.on('data', function (datum) {
+    console.log(datum.toString())
+  })
+  res.on('error', function (error) {
+    console.log(error)
+  })
+}).on('error', function (error) {
+  console.log(error)
+})
