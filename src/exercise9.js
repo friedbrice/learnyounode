@@ -26,7 +26,7 @@ var checkAndPrint = function () {
   }
 }
 
-var collect = function (/*str*/url, /*obj*/result) {
+var collect = function (/*str*/url, /*Obj*/result) {
   http.get(url, function (response) {
 
     var buffer = ''
