@@ -21,7 +21,7 @@
 
 var net = require('net')
 
-var portNumber = process.argv[2]
+var port = process.argv[2]
 
 var server = net.createServer(function (socket) {
 
@@ -46,4 +46,4 @@ var server = net.createServer(function (socket) {
   socket.end(fmtDate)
 })
 
-server.listen(portNumber)
+server.listen(port)
