@@ -1,4 +1,4 @@
-'use-strict'
+'use strict'
 
 /**
  * exercise2.js
