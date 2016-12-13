@@ -17,7 +17,7 @@
 var fs = require('fs')
 var http = require('http')
 
-var port = process.argv[2]
+var port = parseInt(process.argv[2], 10)
 var path = process.argv[3]
 
 var server = http.createServer(function (request, response) {

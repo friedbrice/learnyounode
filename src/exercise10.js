@@ -21,7 +21,7 @@
 
 var net = require('net')
 
-var port = process.argv[2]
+var port = parseInt(process.argv[2], 10)
 
 var server = net.createServer(function (socket) {
 
