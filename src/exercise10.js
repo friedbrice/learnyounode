@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * exercise10.js
  *
@@ -19,20 +17,20 @@
  * After sending the string, closes the connection.
  */
 
-var net = require('net')
+const Net = require('net')
 
-var port = parseInt(process.argv[2], 10)
+const port = parseInt(process.argv[2], 10)
 
-var server = net.createServer(function (socket) {
+const server = Net.createServer((socket) => {
 
   // http://stackoverflow.com/questions/8169785/
-  var fmt = function (str) {
+  function fmt(str) {
     return ('0' + str).slice(-2)
   }
 
-  var date = new Date()
+  const date = new Date()
 
-  var fmtDate = date.getFullYear().toString() +
+  const fmtDate = date.getFullYear().toString() +
                 '-' +
                 fmt((date.getMonth() + 1).toString()) +
                 '-' +

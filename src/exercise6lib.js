@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * exercise6lib.js
  *
@@ -8,27 +6,23 @@
  * function, in that order.
  */
 
-module.exports = function (
-  /*str*/directory,
-  /*str*/extension,
-  /*fnc*/callback
-) {
+module.exports = (directory, extension, callback) => {
 
-  var fs = require('fs')
+  const Fs = require('fs')
 
-  return fs.readdir(directory, function (error, files) {
+  Fs.readdir(directory, (error, files) => {
     if (error) {
-      return callback(error, null)
+      callback(error, null)
     } else {
 
-      var filtered = files.filter(function (filename) {
-        var parts = filename.split('.')
-        var length = parts.length
+      const filtered = files.filter((filename) => {
+        const parts = filename.split('.')
+        const length = parts.length
 
         return length > 1 && parts[length - 1] === extension
       })
 
-      return callback(null, filtered)
+      callback(null, filtered)
     }
   })
 }

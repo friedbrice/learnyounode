@@ -1,9 +1,9 @@
 /**
  * exercise13.js
  *
- * An HTTP **server** that serves JSON data when it receives a GET request
- * to the path '/api/parsetime'. The request should contain a query string
- * with a key 'iso' and an ISO-format time as the value.
+ * An HTTP **server** that serves JSON data when it receives a GET
+ * request to the path '/api/parsetime'. The request should contain a
+ * query string with a key 'iso' and an ISO-format time as the value.
  *
  * For example:
  *
@@ -18,15 +18,15 @@
  *       "second": 15
  *     }
  *
- * A second endpoint for the path '/api/unixtime' accepts the same
- * query string but returns UNIX epoch time in milliseconds (the number of
- * milliseconds since 1 Jan 1970 00:00:00 UTC) under the property 'unixtime'.
- * For example:
+ * A second endpoint for the path '/api/unixtime' accepts the same query
+ * string but returns UNIX epoch time in milliseconds (the number of
+ * milliseconds since 1 Jan 1970 00:00:00 UTC) under the property
+ * 'unixtime'. For example:
  *
  *     { "unixtime": 1376136615474 }
  *
- * Server listens on the port provided by the first argument to
- * the program.
+ * Server listens on the port provided by the first argument to the
+ * program.
  */
 
 const Http = require('http')
@@ -38,20 +38,19 @@ const NOT_FOUND = 404
 const NOT_ALLOWED = 405
 const MIME_APPJSON = { 'Content-Type': 'application/json' }
 
-const PORT = parseInt(process.argv[2], 10)
+const port = parseInt(process.argv[2], 10)
 
-let server = Http.createServer((request, response) => {
+const server = Http.createServer((request, response) => {
 
   if (request.method !== 'GET') {
     response.statusCode = NOT_ALLOWED
     response.end()
   }
 
-  let url = Url.parse(request.url, true)
-  let pathname = url.pathname
-  let date = new Date(url.query.iso)
+  const url = Url.parse(request.url, true)
+  const date = new Date(url.query.iso)
 
-  switch (pathname) {
+  switch (url.pathname) {
     case '/api/parsetime':
       response.writeHead(OK, MIME_APPJSON)
       response.end(Lib.ParsedTime.fromDate(date).toString())
@@ -67,4 +66,4 @@ let server = Http.createServer((request, response) => {
   }
 })
 
-server.listen(PORT)
+server.listen(port)

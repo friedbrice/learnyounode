@@ -1,3 +1,9 @@
+/**
+ * exercise13lib.js
+ *
+ * Data structures for representing the response content.
+ */
+
 class ParsedTime {
   constructor(hour, minute, second) {
     this.hour = hour

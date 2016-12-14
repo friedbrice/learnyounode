@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * exercise3.js
  *
@@ -8,16 +6,16 @@
  * console (stdout), similar to running `cat file | wc -l`.
  */
 
-var fs = require('fs')
+const Fs = require('fs')
 
-var path = process.argv[2]
-var contents = fs.readFileSync(path)
+const path = process.argv[2]
+const contents = fs.readFileSync(path)
 
-var countIfNewline = function (/*int*/n, /*byte*/b) {
-  if (b === 0xa) return n + 1
-  else return n
+function countIfNewline(int, byte) {
+  if (byte === 0xa) return int + 1
+  else return int
 }
 
-var newlines = contents.reduce(countIfNewline, 0)
+const newlines = contents.reduce(countIfNewline, 0)
 
 console.log(newlines)

@@ -1,29 +1,31 @@
-'use strict'
-
 /**
  * exercise12.js
  *
- * An HTTP server that receives only POST requests and converts
- * incoming POST body characters to upper-case and returns it to the client.
+ * An HTTP server that receives only POST requests and converts incoming
+ * POST body characters to upper-case and returns it to the client.
  *
- * Server listens on the port provided by the first argument to
- * the program.
+ * Server listens on the port provided by the first argument to the
+ * program.
  */
 
-var http = require('http')
+const Http = require('http')
 
-var port = parseInt(process.argv[2], 10)
+const OK = 200
+const NOT_ALLOWED = 405
+const MIME_TEXTPLAIN = { 'Content-Type': 'text/plain' }
 
-var server = http.createServer(function (request, response) {
+const port = parseInt(process.argv[2], 10)
+
+const server = Http.createServer((request, response) => {
 
   if (request.method !== 'POST') {
-    response.statusCode = 405
+    response.statusCode = NOT_ALLOWED
     response.end()
   }
 
-  request.on('data', function (datum) {
-    response.write(datum.toString().toUpperCase())
-  })
+  response.writeHead(OK, MIME_TEXTPLAIN)
+  request.on('data', (data) => response.write(data.toString().toUpperCase()))
+  request.on('close', response.end)
 })
 
 server.listen(port)

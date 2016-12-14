@@ -1,24 +1,23 @@
-'use strict'
-
 /**
  * exercise9.js
  *
- * A program that collects the complete content provided by each of three URLs
- * and print it to the console (stdout), one line per URL, printing them out in
- * the same order as the URLs are provided as command-line arguments.
+ * A program that collects the complete content provided by each of
+ * three URLs and print it to the console (stdout), one line per URL,
+ * printing them out in the same order as the URLs are provided as
+ * command-line arguments.
  */
 
-var http = require('http')
+const Http = require('http')
 
-var url1 = process.argv[2]
-var url2 = process.argv[3]
-var url3 = process.argv[4]
+const url1 = process.argv[2]
+const url2 = process.argv[3]
+const url3 = process.argv[4]
 
-var result1 = { value: null }
-var result2 = { value: null }
-var result3 = { value: null }
+const result1 = { value: null }
+const result2 = { value: null }
+const result3 = { value: null }
 
-var checkAndPrint = function () {
+function checkAndPrint() {
   if (result1.value && result2.value && result3.value) {
     console.log(result1.value)
     console.log(result2.value)
@@ -26,21 +25,19 @@ var checkAndPrint = function () {
   }
 }
 
-var collect = function (/*str*/url, /*Obj*/result) {
-  http.get(url, function (response) {
+function collect(url, result) {
+  Http.get(url, (response) => {
 
     var buffer = ''
 
-    response.on('data', function (datum) {
-      buffer += datum
-    })
+    response.on('error', console.error)
 
-    response.on('end', function () {
+    response.on('data', (data) => buffer += data)
+
+    response.on('end', () => {
       result.value = buffer
       checkAndPrint()
     })
-
-    response.on('error', console.error)
 
   }).on('error', console.error)
 }

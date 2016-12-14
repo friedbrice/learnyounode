@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * exercise2.js
  *
@@ -7,12 +5,6 @@
  * and prints the sum of those numbers to the console (stdout).
  */
 
-var args = process.argv.slice()
-args.shift() // remove 'node'
-args.shift() // remove the file name
-
-var sum = args.reduce(function (/*int*/n, /*str*/s) {
-  return n + parseInt(s, 10)
-}, 0)
-
+const args = process.argv.slice(2, process.argv.length)
+const sum = args.reduce((int, str) => int + parseInt(str, 10), 0)
 console.log(sum)
