@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * exercise13.js
  *
@@ -31,12 +29,9 @@
  * the program.
  */
 
-// Note: This is a bit overengineered, but I wanted to imagine
-// I was making an actual, big, complicated, robust HTTP server.
-// Please bear with me.
-
 const Http = require('http')
 const Url = require('url')
+const Lib = require('./exercise13lib.js')
 
 const OK = 200
 const NOT_FOUND = 404
@@ -45,49 +40,30 @@ const MIME_APPJSON = { 'Content-Type': 'application/json' }
 
 const PORT = parseInt(process.argv[2], 10)
 
-function ParsedTime(hour, minute, second) {
-  this.hour = hour
-  this.minute = minute
-  this.second = second
-  this.toString = function () { return JSON.stringify(this) }
-}
-
-function UnixTime(seconds) {
-  this.unixtime = seconds
-  this.toString = function () { return JSON.stringify(this) }
-}
-
-var /*ParsedTime*/ parseTime = function (/*Date*/date) {
-  return new ParsedTime(date.getHours(), date.getMinutes(), date.getSeconds())
-}
-
-var /*UnixTime*/ unixTime = function (/*Date*/date) {
-  return new UnixTime(date.getTime())
-}
-
-var server = Http.createServer(function (request, response) {
+let server = Http.createServer((request, response) => {
 
   if (request.method !== 'GET') {
     response.statusCode = NOT_ALLOWED
     response.end()
   }
 
-  var url = Url.parse(request.url, true)
-  var pathname = url.pathname
-  var date = new Date(url.query.iso)
+  let url = Url.parse(request.url, true)
+  let pathname = url.pathname
+  let date = new Date(url.query.iso)
 
   switch (pathname) {
     case '/api/parsetime':
       response.writeHead(OK, MIME_APPJSON)
-      response.end(parseTime(date).toString())
+      response.end(Lib.ParsedTime.fromDate(date).toString())
       break
     case '/api/unixtime':
       response.writeHead(OK, MIME_APPJSON)
-      response.end(unixTime(date).toString())
+      response.end(Lib.UnixTime.fromDate(date).toString())
       break
     default:
       response.statusCode = NOT_FOUND
       response.end()
+      break
   }
 })
 
