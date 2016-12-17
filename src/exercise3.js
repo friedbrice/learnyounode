@@ -8,12 +8,14 @@
 
 const Fs = require('fs')
 
-const path = process.argv[2]
-const contents = fs.readFileSync(path)
+const NEWLINE_BYTE = 0xa
 
-function countIfNewline(int, byte) {
-  if (byte === 0xa) return int + 1
-  else return int
+const path = process.argv[2]
+const contents = Fs.readFileSync(path)
+
+function countIfNewline(num, byte) {
+  if (byte === NEWLINE_BYTE) return num + 1
+  else return num
 }
 
 const newlines = contents.reduce(countIfNewline, 0)

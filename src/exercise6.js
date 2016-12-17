@@ -13,9 +13,6 @@ const directory = process.argv[2]
 const extension = process.argv[3]
 
 FilterByExtension(directory, extension, (error, files) => {
-  if (error) {
-    console.error(error)
-  } else {
-    files.map((file) => console.log(file))
-  }
+  if (error !== null) console.error(error)
+  else files.map((file) => console.log(file))
 })

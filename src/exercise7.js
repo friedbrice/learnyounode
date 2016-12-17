@@ -12,6 +12,6 @@ const Http = require('http')
 const url = process.argv[2]
 
 Http.get(url, (response) => {
-  response.on('error', console.error
+  response.on('error', console.error)
   response.on('data', (data) => console.log(data.toString()))
 }).on('error', console.error)

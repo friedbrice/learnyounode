@@ -28,5 +28,4 @@ Http.get(url, (response) => {
     console.log(buffer.toString())
   })
 
-
 }).on('error', console.error)

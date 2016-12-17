@@ -11,9 +11,8 @@ module.exports = (directory, extension, callback) => {
   const Fs = require('fs')
 
   Fs.readdir(directory, (error, files) => {
-    if (error) {
-      callback(error, null)
-    } else {
+    if (error !== null) callback(error, null)
+    else {
 
       const filtered = files.filter((filename) => {
         const parts = filename.split('.')

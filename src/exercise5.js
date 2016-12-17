@@ -13,7 +13,8 @@ const directory = process.argv[2]
 const extension = process.argv[3]
 
 Fs.readdir(directory, (error, files) => {
-  if (!error) {
+  if (error !== null) console.error(error)
+  else {
 
     function hasRightExt(filename) {
       const parts = filename.split('.')

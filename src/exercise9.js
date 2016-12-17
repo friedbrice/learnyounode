@@ -13,12 +13,12 @@ const url1 = process.argv[2]
 const url2 = process.argv[3]
 const url3 = process.argv[4]
 
-const result1 = { value: null }
-const result2 = { value: null }
-const result3 = { value: null }
+const result1 = { done: false, value: null }
+const result2 = { done: false, value: null }
+const result3 = { done: false, value: null }
 
 function checkAndPrint() {
-  if (result1.value && result2.value && result3.value) {
+  if (result1.done && result2.done && result3.done) {
     console.log(result1.value)
     console.log(result2.value)
     console.log(result3.value)
@@ -36,6 +36,7 @@ function collect(url, result) {
 
     response.on('end', () => {
       result.value = buffer
+      result.done = true
       checkAndPrint()
     })
 

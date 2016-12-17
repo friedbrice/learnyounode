@@ -6,5 +6,5 @@
  */
 
 const args = process.argv.slice(2, process.argv.length)
-const sum = args.reduce((int, str) => int + parseInt(str, 10), 0)
+const sum = args.reduce((num, str) => num + Number(str), 0)
 console.log(sum)

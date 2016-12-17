@@ -24,24 +24,25 @@ const port = parseInt(process.argv[2], 10)
 const server = Net.createServer((socket) => {
 
   // http://stackoverflow.com/questions/8169785/
-  function fmt(str) {
+  function format(str) {
     return ('0' + str).slice(-2)
   }
 
   const date = new Date()
 
-  const fmtDate = date.getFullYear().toString() +
-                '-' +
-                fmt((date.getMonth() + 1).toString()) +
-                '-' +
-                fmt(date.getDate().toString()) +
-                ' ' +
-                fmt(date.getHours().toString()) +
-                ':' +
-                fmt(date.getMinutes().toString()) +
-                '\n'
+  const formattedDate = ''
+    + date.getFullYear().toString()
+    + '-'
+    + format((date.getMonth() + 1).toString())
+    + '-'
+    + format(date.getDate().toString())
+    + ' '
+    + format(date.getHours().toString())
+    + ':'
+    + format(date.getMinutes().toString())
+    + '\n'
 
-  socket.end(fmtDate)
+  socket.end(formattedDate)
 })
 
 server.listen(port)
